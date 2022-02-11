@@ -1,0 +1,40 @@
+{
+  "name": "@do-while-for-each/rxjs",
+  "description": "RxJS re-export, and the functionality associated with RxJS",
+  "version": "1.0.28",
+  "main": "dist/cjs/index.js",
+  "types": "dist/types/index.d.ts",
+  "homepage": "https://github.com/dwfe/rxjs",
+  "bugs": "https://github.com/dwfe/rxjs/issues",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:dwfe/rxjs.git"
+  },
+  "keywords": [
+    "rxjs"
+  ],
+  "author": "Do|While|For|Each",
+  "license": "MIT",
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "dwfeFs rmForce dist && tsc -b src/tsconfig.json",
+    "types": "tsc -b config/tsconfig.types.json",
+    "version": "npm run build && npm run types",
+    "postversion": "git push",
+    "deploy": "npm version patch && npm publish"
+  },
+  "dependencies": {
+
+  },
+  "devDependencies": {
+    "@do-while-for-each/common": "^1.0.5",
+    "rxjs": "7.5.4"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
