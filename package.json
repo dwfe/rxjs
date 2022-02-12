@@ -21,7 +21,8 @@
     "README.md"
   ],
   "scripts": {
-    "build": "dwfeFs rmForce dist && tsc -b src/tsconfig.json",
+    "clean": "dwfeFs cleanDir . --noConfirm --fileNames=\"dist;node_modules;package-lock.json\"",
+    "build": "dwfeFs rmForce dist --noConfirm && tsc -b src/tsconfig.json",
     "types": "tsc -b config/tsconfig.types.json",
     "version": "npm run build && npm run types",
     "postversion": "git push",
@@ -31,7 +32,7 @@
     "rxjs": "7.5.4"
   },
   "devDependencies": {
-    "@do-while-for-each/common": "^1.0.5"
+    "@do-while-for-each/common": "^1.0.6"
   },
   "publishConfig": {
     "access": "public"
