@@ -32,6 +32,7 @@
     "rxjs": "7.5.4"
   },
   "devDependencies": {
+    "@do-while-for-each/tsconfig": "^1.0.3",
     "@do-while-for-each/common": "^1.0.6"
   },
   "publishConfig": {
