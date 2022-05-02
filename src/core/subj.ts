@@ -25,10 +25,11 @@ export class Subj<TData = any> implements IStoppable {
    */
   valuePromise = (): Promise<TData> => firstValueFrom(this.value$);
 
-  existedValuePromise = (): Promise<TData> =>
+  nonNullableValuePromise = (): Promise<NonNullable<TData>> =>
     firstValueFrom(this.value$.pipe(
-      filter(x => !!x),
-    ));
+        filter(x => !(x === null || x === undefined)),
+      ) as Observable<NonNullable<TData>>
+    );
 
   stop(): void {
     this.stopper.stop()
