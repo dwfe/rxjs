@@ -23,9 +23,9 @@ export class Subj<TData = any> implements IStoppable {
   /**
    * It may be necessary to wait for a value that does not exist yet, but it is expected in the future
    */
-  value = (): Promise<TData> => firstValueFrom(this.value$);
+  valuePromise = (): Promise<TData> => firstValueFrom(this.value$);
 
-  existedValue = (): Promise<TData> =>
+  existedValuePromise = (): Promise<TData> =>
     firstValueFrom(this.value$.pipe(
       filter(x => !!x),
     ));
@@ -42,7 +42,7 @@ export class Subj<TData = any> implements IStoppable {
         case 0:
           throw new Error(`instead of 'shareReplay({refCount: false/true, bufferSize: 0})', use 'share()' operator`);
         case undefined:
-          throw new Error(`undefined bufferSize for subj type '${type}'`);
+          throw new Error(`undefined bufferSize for subj type 'shareReplay'`);
       }
     }
     let ob$ = this.subj.asObservable();
