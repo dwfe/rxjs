@@ -22,7 +22,7 @@ export class Subj<TData = any> implements IStoppable {
 
   private createValue$({type, bufferSize, startValue}: ISubjOpt<TData>): Observable<TData> {
     if (type === 'shareReplay' && bufferSize === 0)
-      throw new Error('Instead of "shareReplay({refCount: false/true, bufferSize: 0})", use "share()" operator');
+      throw new Error('Instead of "shareReplay({bufferSize: 0})", use "share()" operator');
 
     let ob$ = this.subj.asObservable();
 
