@@ -1,7 +1,7 @@
 import {IStoppable} from '@do-while-for-each/common'
-import {filter, firstValueFrom, Observable, share, shareReplay, startWith, Subject, takeUntil} from '../re-export'
-import {ISubjOpt} from './contract'
-import {Stopper} from './stopper'
+import {filter, firstValueFrom, Observable, share, shareReplay, startWith, Subject, takeUntil} from '../../re-export'
+import {ISubjOpt} from './subj.contract'
+import {Stopper} from '../stopper'
 
 export class Subj<TData = any> implements IStoppable {
 
