@@ -20,23 +20,6 @@ export class Subj<TData = any> implements IStoppable {
     this.subj.next(value)
   }
 
-  /**
-   * It may be necessary to wait for a value that does not exist yet, but it is expected in the future
-   */
-  valuePromise = (): Promise<TData> => firstValueFrom(this.value$);
-
-  nonNullableValuePromise = (): Promise<NonNullable<TData>> =>
-    firstValueFrom(this.value$.pipe(
-        filter(x => !(x === null || x === undefined)),
-      ) as Observable<NonNullable<TData>>
-    );
-
-  stop(): void {
-    this.stopper.stop()
-    this.subj.complete()
-  }
-
-
   private createValue$({type, bufferSize, initValue}: ISubjOpt<TData>): Observable<TData> {
     if (type === 'shareReplay') {
       switch (bufferSize) {
@@ -72,5 +55,30 @@ export class Subj<TData = any> implements IStoppable {
         throw new Error(`unknown subj type '${type}'`);
     }
   }
+
+  stop(): void {
+    this.stopper.stop()
+    this.subj.complete()
+  }
+
+
+//region Future
+  /**
+   * It may be necessary to wait for a value that does not exist yet, but it is expected in the future
+   */
+
+  nextValuePromise = (): Promise<TData> => firstValueFrom(this.value$);
+
+  nextNonNullableValuePromise = (): Promise<NonNullable<TData>> =>
+    firstValueFrom(this.value$.pipe(
+        filter(x => !(x === null || x === undefined)),
+      ) as Observable<NonNullable<TData>>
+    );
+
+  nonNullableValuePromise = async (): Promise<NonNullable<TData>> =>
+    this.lastValue ?? this.nextNonNullableValuePromise()
+  ;
+
+//endregion Future
 
 }
