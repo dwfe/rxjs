@@ -6,5 +6,5 @@ export type TSubjType =
 export interface ISubjOpt<TData> {
   type?: TSubjType;
   bufferSize?: number;
-  initValue?: TData;
+  startValue?: TData;
 }

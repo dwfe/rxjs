@@ -20,21 +20,21 @@ export class Subj<TData = any> implements IStoppable {
     this.subj.next(value)
   }
 
-  private createValue$({type, bufferSize, initValue}: ISubjOpt<TData>): Observable<TData> {
+  private createValue$({type, bufferSize, startValue}: ISubjOpt<TData>): Observable<TData> {
     if (type === 'shareReplay') {
       switch (bufferSize) {
         case 0:
-          throw new Error(`instead of 'shareReplay({refCount: false/true, bufferSize: 0})', use 'share()' operator`);
+          throw new Error('instead of "shareReplay({refCount: false/true, bufferSize: 0})", use "share()" operator');
         case undefined:
-          throw new Error(`undefined bufferSize for subj type 'shareReplay'`);
+          throw new Error('undefined bufferSize for subj type "shareReplay"');
       }
     }
     let ob$ = this.subj.asObservable();
 
-    if (initValue !== undefined) {
-      this.lastValue = initValue;
+    if (startValue !== undefined) {
+      this.lastValue = startValue;
       ob$ = ob$.pipe(
-        startWith(initValue)
+        startWith(startValue)
       );
     }
     ob$ = ob$.pipe(
@@ -49,7 +49,7 @@ export class Subj<TData = any> implements IStoppable {
         );
       case 'shareReplay':
         return ob$.pipe(
-          shareReplay({refCount: true, bufferSize})
+          shareReplay({refCount: true, bufferSize: bufferSize ?? 1})
         );
       default:
         throw new Error(`unknown subj type '${type}'`);
