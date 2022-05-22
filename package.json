@@ -26,19 +26,19 @@
     "LICENSE",
     "README.md"
   ],
+  "dependencies": {
+    "rxjs": "7.5.5"
+  },
+  "devDependencies": {
+    "@do-while-for-each/tsconfig": "1.x.x",
+    "@do-while-for-each/common": "1.x.x"
+  },
   "scripts": {
     "clean": "dwfeFs cleanDir . --fileNames=\"dist;node_modules;package-lock.json\"",
     "build": "dwfeFs rmForce dist --noConfirm && tsc -b src/tsconfig.json",
     "version": "npm run build",
     "postversion": "git push",
     "deploy": "npm version patch && npm publish"
-  },
-  "dependencies": {
-    "rxjs": "7.5.5"
-  },
-  "devDependencies": {
-    "@do-while-for-each/tsconfig": "^1.0.3",
-    "@do-while-for-each/common": "^1.2.14"
   },
   "publishConfig": {
     "access": "public"
